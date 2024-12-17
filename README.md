@@ -48,16 +48,16 @@ Chat-With-PDF-RAG/
 ├── data/                # Directory for PDF uploads
 ├── embeddings/          # Storage for vector embeddings
 ├── app.py               # Main backend application (Flask/FastAPI)
-├── queryHandler.js      # Frontend query handling logic
+├── queryHandler.js      # Frontend logic for handling queries
 ├── templates/           # Frontend UI files
-│   └── index.html       # HTML file for user interface
+│   └── index.html       # HTML UI for user interaction
 ├── requirements.txt     # Python dependencies
 └── README.md            # Project documentation
 API Endpoints
 Endpoint	Method	Description
-/upload	POST	Upload and process a PDF file.
-/ask	POST	Retrieve data based on user queries.
-/compare	POST	Process and retrieve comparison data.
+/upload	POST	Uploads and processes a PDF file.
+/ask	POST	Handles user queries and retrieves data.
+/compare	POST	Processes comparison-related queries.
 Example Queries
 Simple Query
 Input:
@@ -91,32 +91,34 @@ PDF Processing	PyPDF2, pdfminer.six
 Text Embeddings	Sentence Transformers
 Vector Database	FAISS
 Frontend	HTML, CSS, JavaScript
-Response Generation	Custom logic
+Response Generation	Custom logic or locally hosted models
 Future Enhancements
-Feature	Description
-Parallel PDF Processing	Support faster and large-scale PDF processing.
-Advanced Comparison Visuals	Add visualizations like charts and graphs.
-Multilingual Support	Enable support for PDFs in multiple languages.
-Hybrid Search Optimization	Combine keyword and vector-based retrieval.
+Planned Feature	Description
+Parallel PDF Processing	Support large-scale PDFs with faster performance.
+Advanced Comparison Visuals	Add charts and graphs for better visual comparisons.
+Multilingual Support	Handle PDFs and queries in multiple languages.
+Hybrid Search Optimization	Combine keyword-based and vector-based retrieval.
 Setup Instructions
-1. Clone the Repository
+Clone the Repository
+
 bash
 Copy code
 git clone https://github.com/your-username/Chat-With-PDF-RAG.git
 cd Chat-With-PDF-RAG
-2. Install Dependencies
+Install Dependencies
+
 bash
 Copy code
 pip install -r requirements.txt
-3. Run the Backend
+Run the Backend
+
 bash
 Copy code
 python app.py
-4. Access the Application
-Open your browser and navigate to http://localhost:5000.
+Access the Application Open http://localhost:5000 in your browser.
 
 Contributing
-We welcome contributions! Follow these steps to contribute:
+Contributions are welcome! Follow these steps to contribute:
 
 Fork the repository.
 Create a new branch:
@@ -127,16 +129,12 @@ Commit your changes:
 bash
 Copy code
 git commit -m "Add new feature"
-Push the branch:
-bash
-Copy code
-git push origin feature-branch
-Submit a pull request for review.
+Push to your branch and submit a pull request.
 License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 Acknowledgments
 Tool/Library	Purpose
 Hugging Face	Pre-trained embeddings (Sentence Transformers).
-FAISS	Efficient vector search capabilities.
-PyPDF2 / pdfminer.six	PDF text extraction libraries.
+FAISS	Vector search capabilities.
+PyPDF2 / pdfminer.six	PDF text extraction.
