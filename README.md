@@ -1,171 +1,161 @@
-# Task-1-Chat-with-PDF-Using-RAG-Pipeline
+Here is the README.md file in a clean, well-structured format that includes tables for clarity. Copy and paste it as it is:
 
-## Overview
+## **Overview**
 
-This project implements a **Retrieval-Augmented Generation (RAG)** pipeline to allow users to interact with semi-structured data in multiple PDF files. The system extracts, chunks, embeds, and stores data efficiently for similarity-based retrieval. It answers user queries and performs accurate comparisons leveraging a selected **Large Language Model (LLM)**.
+This project implements a **Retrieval-Augmented Generation (RAG)** pipeline, enabling users to interact with semi-structured data across multiple PDF files. The system extracts, chunks, embeds, and stores the data for efficient similarity-based retrieval. It can answer natural language queries and perform detailed comparisons using a **Large Language Model (LLM)**.
 
 ---
 
-## Features
+## **Features**
+
+| **Feature**             | **Description**                                                                 |
+|--------------------------|-------------------------------------------------------------------------------|
+| **Data Ingestion**       | Extracts and processes text from PDF files, generating vector embeddings.     |
+| **Query Handling**       | Handles user queries, retrieves relevant chunks, and answers using the LLM.   |
+| **Comparison Queries**   | Compares terms across PDFs and generates structured outputs (e.g., tables).   |
+| **Response Generation**  | Produces accurate and context-aware responses with retrieved data.            |
+
+---
+
+## **Functional Workflow**
 
 1. **Data Ingestion**
-   - Extracts text and relevant structured data from PDF files.
-   - Segments the extracted text into logical chunks.
-   - Converts chunks into vector embeddings using a pre-trained embedding model.
-   - Stores the embeddings in a vector database for efficient retrieval.
+   - **Input**: PDF files containing semi-structured data.
+   - **Steps**:
+     - Extract text using a PDF parser.
+     - Segment text into logical chunks.
+     - Convert text chunks into vector embeddings using a pre-trained model.
+     - Store embeddings in a **Vector Database** (e.g., FAISS, Pinecone).
 
 2. **Query Handling**
-   - Processes user questions and converts them into vector embeddings.
-   - Performs similarity search to retrieve the most relevant data chunks.
-   - Passes the retrieved data to an LLM to generate accurate responses.
+   - **Input**: User's natural language question.
+   - **Steps**:
+     - Convert query into vector embeddings.
+     - Perform similarity search in the vector database.
+     - Pass retrieved chunks to the LLM for context-based answers.
 
 3. **Comparison Queries**
-   - Identifies and compares specific terms or fields across multiple PDF files.
-   - Aggregates and structures the retrieved data for comparison.
-   - Generates responses in structured formats such as tables or bullet points.
+   - **Input**: User's query asking for comparisons.
+   - **Steps**:
+     - Identify fields or terms to compare across PDFs.
+     - Retrieve relevant data chunks.
+     - Aggregate and present comparisons in **structured formats**.
 
 4. **Response Generation**
-   - Utilizes retrieval-augmented prompts to ensure contextual and factual responses.
-   - Ensures accuracy by directly incorporating data retrieved from the vector database.
+   - Generates detailed, accurate answers using retrieved data.
+   - Ensures factuality and precision by grounding the response in the retrieved content.
 
 ---
 
-## Functional Workflow
+## **Project Setup**
 
-1. **Data Ingestion**
-   - Input: PDF files uploaded by the user.
-   - Tools: 
-     - PDF text extraction library (e.g., PyPDF2, PDFMiner).
-     - Pre-trained embedding model (e.g., OpenAI's `text-embedding-ada` or Sentence Transformers).
-     - Vector database (e.g., FAISS, Pinecone, or ChromaDB).
-   - Output: Vector embeddings stored for retrieval.
+### **Prerequisites**
 
-2. **Query Handling**
-   - Converts user queries into vector embeddings.
-   - Performs similarity searches in the vector database to retrieve chunks.
-   - Passes retrieved content to the LLM for detailed answers.
-
-3. **Comparison Queries**
-   - Detects comparison-related queries.
-   - Retrieves corresponding chunks across PDF files.
-   - Aggregates and compares the data.
-   - Returns responses in tabular or structured format.
-
-4. **Response Generation**
-   - LLM generates a final response using the retrieved content and query context.
-   - Ensures factual accuracy and completeness.
+| **Requirement**          | **Version**/ **Tool**                                       |
+|---------------------------|------------------------------------------------------------|
+| **Python**               | >= 3.8                                                     |
+| **PDF Extraction Tool**  | `PyPDF2` or `pdfminer.six`                                  |
+| **Vector Database**      | FAISS, Pinecone, or ChromaDB                                |
+| **Embedding Model**      | OpenAI Embeddings (`text-embedding-ada`) or SentenceTransformers |
+| **API Keys**             | OpenAI API Key for LLM and embeddings                       |
 
 ---
 
-## Project Setup
+### **Installation**
 
-### Prerequisites
-
-1. **Python** (>=3.8)
-2. Libraries:
-   - `PyPDF2` or `pdfminer.six` (PDF extraction)
-   - `sentence-transformers` (Embeddings)
-   - `FAISS` or `Pinecone` (Vector database)
-   - `openai` (LLM integration)
-   - `Flask` or `FastAPI` (API development)
-
-3. **API Keys**:
-   - OpenAI API Key (for embedding model and LLM).
-
----
-
-### Installation
-
-1. Clone the repository:
+1. **Clone the Repository**:
    ```bash
    git clone https://github.com/yourusername/Chat-With-PDF-RAG.git
    cd Chat-With-PDF-RAG
-Install dependencies:
+Install Dependencies:
 
 bash
 Copy code
 pip install -r requirements.txt
-Set up API keys in your environment:
+Set Up API Keys:
 
+Add your API key to the environment:
 bash
 Copy code
 export OPENAI_API_KEY="your_openai_api_key"
 How to Run
-Start the Backend Server:
-
-Run the following command:
-bash
-Copy code
+Step	Command
+Start the Backend	Run the server:
+```bash
 python app.py
-Upload PDFs:
-
-Use the provided form interface to upload PDFs.
-PDFs will be processed, chunked, embedded, and stored in the vector database.
-Ask Queries:
-
-Input natural language queries into the query form.
-The system will process the query, retrieve relevant data, and generate accurate responses.
-Comparison Queries:
-
-Ask questions like: "Compare the Chief Ministers across all states."
-The system will identify terms, retrieve relevant chunks, and provide structured comparisons.
-Access the system via:
-
-bash
-Copy code
-http://localhost:5000
+```
+Upload PDFs	Use the UI to upload PDFs for processing.
+Ask Queries	Input natural language queries to retrieve answers.
+Comparison Queries	Ask for comparisons like "Compare the official languages."
+Access Application	Go to http://localhost:5000 in your browser.
 Directory Structure
-bash
+plaintext
 Copy code
 Chat-With-PDF-RAG/
 │
-├── data/                     # Directory to store uploaded PDFs
-├── embeddings/               # Directory to store embeddings (if local)
-├── app.py                    # Main Flask/FastAPI backend
-├── queryHandler.js           # Frontend JS for query handling
+├── data/                     # PDF uploads directory
+├── embeddings/               # Vector embeddings storage
+├── app.py                    # Main backend application (Flask/FastAPI)
+├── queryHandler.js           # Frontend query handling
 ├── templates/
-│   └── index.html            # Frontend UI for user interaction
+│   └── index.html            # HTML UI for interacting with the system
 ├── requirements.txt          # Python dependencies
-└── README.md                 # Project Documentation
+└── README.md                 # Project documentation
 API Endpoints
 Endpoint	Method	Description
-/upload	POST	Upload and process a new PDF file.
-/ask	POST	Process user queries and return answers.
-/compare	POST	Handle comparison-related queries.
+/upload	POST	Uploads and processes a PDF file.
+/ask	POST	Handles user queries and retrieves data.
+/compare	POST	Processes comparison-related queries.
 Example Queries
 Simple Query:
 
-"What is the capital of Andhra Pradesh?"
-Response: "The capital of Andhra Pradesh is Amaravati."
+Input: "What is the capital of Andhra Pradesh?"
+Response:
+json
+Copy code
+{
+  "State": "Andhra Pradesh",
+  "Capital": "Amaravati"
+}
 Comparison Query:
 
-"Compare the official languages of Andhra Pradesh and Assam."
+Input: "Compare the official languages of Andhra Pradesh and Assam."
 Response:
-sql
-Copy code
-State              | Official Language      | Additional Language
--------------------------------------------------------------
-Andhra Pradesh     | Telugu                 | Urdu
-Assam              | Assamese               | None
+State	Official Language	Additional Language
+Andhra Pradesh	Telugu	Urdu
+Assam	Assamese	None
 Technology Stack
-Backend: Python, Flask/FastAPI
-Frontend: HTML, CSS, JavaScript (Bootstrap for styling)
-Embedding Model: Sentence Transformers or OpenAI Embeddings
-Vector Database: FAISS or Pinecone
-LLM: OpenAI GPT (or any compatible LLM)
+Component	Tool/Library
+Backend	Python, Flask/FastAPI
+PDF Processing	PyPDF2, pdfminer.six
+Vector Embeddings	OpenAI Embeddings, SentenceTransformers
+Vector Database	FAISS, Pinecone, ChromaDB
+Large Language Model	OpenAI GPT-4 or GPT-3.5
+Frontend	HTML, CSS, JavaScript
 Future Enhancements
-Add support for large-scale PDFs with parallel processing.
-Incorporate advanced comparison charts or visualizations.
-Support multilingual PDFs and queries.
-Optimize retrieval performance with hybrid search techniques.
+Planned Feature	Description
+Parallel PDF Processing	Support large-scale PDFs with faster performance.
+Advanced Comparison Visualizations	Add charts and graphs for detailed comparisons.
+Multilingual Support	Handle PDFs and queries in multiple languages.
+Hybrid Search Optimization	Combine keyword and vector-based retrieval.
 Contributing
-Contributions are welcome! Please fork this repository and submit pull requests for any improvements or bug fixes.
+Contributions are welcome! To contribute:
 
+Fork the repository.
+Create a new branch:
+bash
+Copy code
+git checkout -b feature-branch
+Commit your changes:
+bash
+Copy code
+git commit -m "Add new feature"
+Submit a pull request.
 License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 Acknowledgments
-OpenAI for the LLM and embedding models.
+OpenAI for LLM and Embedding API.
 Hugging Face for Sentence Transformers.
 FAISS/Pinecone for vector search capabilities.
 yaml
